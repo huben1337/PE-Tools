@@ -2,7 +2,9 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$InputFile,
     [Parameter(Mandatory=$true)]
-    [string]$OutputFile
+    [string]$OutputFile,
+    [Parameter(Mandatory=$true)]
+    [string]$IconFile
 ) 
 
 Import-Module .\Get-IconFromPng.psm1
@@ -52,7 +54,7 @@ foreach ($iconEntryId in $groupIconDir.idEntries.Keys) {
     if ($iconWidth -eq 0) {
         $iconWidth = 256
     }
-    $newIcon = [byte[]](Get-IconFromPng -InputFile "C:\Users\huben\Documents\IT\tools\google-forms-spammer\build\icon.png" -size $iconWidth)
+    $newIcon = [byte[]](Get-IconFromPng -InputFile $IconFile -size $iconWidth)
     $oldIconsDataSize += $groupIconDir.idEntries[$iconEntryId].bytesInRes
     $newIconsDataSize += $newIcon.Length
     $icons[$iconEntryId] = @{
